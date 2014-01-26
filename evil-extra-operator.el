@@ -183,22 +183,11 @@ be passed to EVAL-FUNC as its rest arguments"
   (interactive "<r>")
   (remember-region beg end))
 
-(defvar evil-extra-operator-mode-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map evil-extra-operator-google-translate-key 'evil-operator-google-translate)
-    (define-key map evil-extra-operator-google-search-key 'evil-operator-google-search)
-    (define-key map evil-extra-operator-eval-key 'evil-operator-eval)
-    (define-key map evil-extra-operator-fold-key 'evil-operator-fold)
-    (define-key map evil-extra-operator-highlight-key 'evil-operator-highlight)
-    (define-key map evil-extra-operator-org-capture-key 'evil-operator-org-capture)
-    (define-key map evil-extra-operator-remember-key 'evil-operator-remember)
-    map))
-
 ;;;###autoload
 (define-minor-mode evil-extra-operator-mode
   "Buffer local minor mode to enable extra operators for Evil."
   :lighter ""
-  :keymap evil-extra-operator-mode-map
+  :keymap (make-sparse-keymap)
   (evil-normalize-keymaps))
 
 (defun evil-extra-operator-mode-install () (evil-extra-operator-mode 1))
@@ -208,7 +197,48 @@ be passed to EVAL-FUNC as its rest arguments"
   evil-extra-operator-mode evil-extra-operator-mode-install
   "Global minor mode of extra operator for Evil.")
 
-(evil-make-overriding-map evil-extra-operator-mode-map)
+(evil-define-key 'motion evil-extra-operator-mode-map
+  evil-extra-operator-google-search-key
+  'evil-operator-google-search)
+(evil-define-key 'normal evil-extra-operator-mode-map
+  evil-extra-operator-google-search-key
+  'evil-operator-google-search)
+(evil-define-key 'motion evil-extra-operator-mode-map
+  evil-extra-operator-google-translate-key
+  'evil-operator-google-translate)
+(evil-define-key 'normal evil-extra-operator-mode-map
+  evil-extra-operator-google-translate-key
+  'evil-operator-google-translate)
+(evil-define-key 'motion evil-extra-operator-mode-map
+  evil-extra-operator-eval-key
+  'evil-operator-eval)
+(evil-define-key 'normal evil-extra-operator-mode-map
+  evil-extra-operator-eval-key
+  'evil-operator-eval)
+(evil-define-key 'motion evil-extra-operator-mode-map
+  evil-extra-operator-remember-key
+  'evil-operator-remember)
+(evil-define-key 'normal evil-extra-operator-mode-map
+  evil-extra-operator-remember-key
+  'evil-operator-remember)
+(evil-define-key 'motion evil-extra-operator-mode-map
+  evil-extra-operator-org-capture-key
+  'evil-operator-org-capture)
+(evil-define-key 'normal evil-extra-operator-mode-map
+  evil-extra-operator-org-capture-key
+  'evil-operator-org-capture)
+(evil-define-key 'motion evil-extra-operator-mode-map
+  evil-extra-operator-highlight-key
+  'evil-operator-highlight)
+(evil-define-key 'normal evil-extra-operator-mode-map
+  evil-extra-operator-highlight-key
+  'evil-operator-highlight)
+(evil-define-key 'motion evil-extra-operator-mode-map
+  evil-extra-operator-fold-key
+  'evil-operator-fold)
+(evil-define-key 'normal evil-extra-operator-mode-map
+  evil-extra-operator-fold-key
+  'evil-operator-fold)
 
 (provide 'evil-extra-operator)
 ;;; evil-extra-operator.el ends here
