@@ -177,11 +177,27 @@ be passed to EVAL-FUNC as its rest arguments"
   (org-capture))
 
 ;;;###autoload
-(evil-define-operator evil-operator-remember (beg end)
+(evil-define-operator evil-operator-remember (beg end type)
   "Evil operator for remember-region"
   :move-point nil
-  (interactive "<r>")
-  (remember-region beg end))
+  (interactive "<R>")
+  (require 'remember)
+  (let* ((s nil)
+         (cont
+          (if (eq type 'block)
+              (progn
+                (evil-apply-on-block
+                 (lambda (b e)
+                   (setq s (cons (buffer-substring-no-properties b e) s)))
+                 beg end nil)
+                (mapconcat 'identity (nreverse s) "\n"))
+            (buffer-substring-no-properties beg end))))
+    (with-temp-buffer
+      (insert cont)
+      (if remember-all-handler-functions
+          (run-hooks 'remember-handler-functions)
+        (run-hook-with-args-until-success 'remember-handler-functions))
+      (remember-destroy))))
 
 ;;;###autoload
 (define-minor-mode evil-extra-operator-mode
