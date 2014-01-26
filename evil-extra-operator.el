@@ -143,7 +143,7 @@ be passed to EVAL-FUNC as its rest arguments"
          (lambda (b e) (setq s (cons (buffer-substring-no-properties b e) s)))
          beg end nil)
         (mapconcat 'identity (nreverse s) " "))
-    (setq s (buffer-substring-no-properties beg end))))
+    (buffer-substring-no-properties beg end)))
 
 ;;;###autoload
 (evil-define-operator evil-operator-highlight (beg end type)
