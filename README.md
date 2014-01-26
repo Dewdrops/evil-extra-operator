@@ -74,3 +74,7 @@ So you can use `goip` to capture current paragraph.
 
 Like evil-operator-org-capture, but use remember-region instead of org-capture.
 
+
+See also
+-----------------------------
+[tarao](https://github.com/tarao)'s [evil-plugins](https://github.com/tarao/evil-plugins) provides operator for comment and moccur.
