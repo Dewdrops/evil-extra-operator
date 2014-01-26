@@ -32,17 +32,20 @@ You can customize option `evil-extra-operator-eval-modes-alist` to let evil-oper
 ```
 See document for this option for details.
 
+---
 
 `gG` (evil-operator-google-search)
 
 Operator to search the web via google.
 
+---
 
 `g.` (evil-operator-google-translate)
 
 Operator to translate text via google translate.
 To use this command, you should have [google-translate](https://github.com/manzyuk/google-translate) installed.
 
+---
 
 `gh` (evil-operator-highlight)
 
@@ -50,6 +53,7 @@ Operator to highlight region.
 To use this command, you should have [highlight.el](http://www.emacswiki.org/emacs-en/download/highlight.el) installed.
 You can use `hlt-eraser-mouse` or `hlt-eraser` which are provided by highlight.el to disable highlight
 
+---
 
 `gs` (evil-operator-fold)
 
@@ -57,13 +61,16 @@ Operator to fold region.
 To use this command, you should have [fold-this.el](https://github.com/magnars/fold-this.el) installed.
 You can use `fold-this-unfold-at-point` or `fold-this-unfold-all` which are provided by fold-this.el for unfolding.
 
+---
 
 `go` (evil-operator-org-capture)
 
 Operator form of org-capture.
 So you can use `goip` to capture current paragraph.
 
+---
 
 `gR` (evil-operator-remember)
 
 Like evil-operator-org-capture, but use remember-region instead of org-capture.
+
