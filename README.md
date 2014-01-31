@@ -30,7 +30,7 @@ You can customize option `evil-extra-operator-eval-modes-alist` to let evil-oper
   '((ruby-mode ruby-send-region)
     (enh-ruby-mode ruby-send-region)))
 ```
-See document for this option for details.
+See document of this option for details.
 
 ---
 
