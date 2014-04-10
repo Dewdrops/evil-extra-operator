@@ -100,7 +100,30 @@ be passed to EVAL-FUNC as its rest arguments"
   :type '(alist :key-type symbol)
   :group 'evil-extra-operator)
 
+
 ;;;###autoload
+(autoload 'evil-operator-eval "evil-extra-operator"
+  "Evil operator for evaluating code." t)
+;;;###autoload
+(autoload 'evil-operator-google-translate "evil-extra-operator"
+  "Evil operator for translating text via google translate." t)
+;;;###autoload
+(autoload 'evil-operator-google-search "evil-extra-operator"
+  "Evil operator for google search." t)
+;;;###autoload
+(autoload 'evil-operator-highlight "evil-extra-operator"
+  "Evil operator for region highlight." t)
+;;;###autoload
+(autoload 'evil-operator-fold "evil-extra-operator"
+  "Evil operator for folding region." t)
+;;;###autoload
+(autoload 'evil-operator-org-capture "evil-extra-operator"
+  "Evil operator for org-capture." t)
+;;;###autoload
+(autoload 'evil-operator-remember "evil-extra-operator"
+  "Evil operator for remember-region" t)
+
+
 (evil-define-operator evil-operator-eval (beg end)
   "Evil operator for evaluating code."
   :move-point nil
@@ -113,7 +136,6 @@ be passed to EVAL-FUNC as its rest arguments"
         (apply func beg end args)
       (eval-region beg end))))
 
-;;;###autoload
 (evil-define-operator evil-operator-google-translate (beg end type)
   "Evil operator for translating text via google translate."
   :move-point nil
@@ -126,7 +148,6 @@ be passed to EVAL-FUNC as its rest arguments"
      source-language target-language
      (.eeo/make-url-args beg end type))))
 
-;;;###autoload
 (evil-define-operator evil-operator-google-search (beg end type)
   "Evil operator for google search."
   :move-point nil
@@ -145,7 +166,6 @@ be passed to EVAL-FUNC as its rest arguments"
         (mapconcat 'identity (nreverse s) " "))
     (buffer-substring-no-properties beg end)))
 
-;;;###autoload
 (evil-define-operator evil-operator-highlight (beg end type)
   "Evil operator for region highlight."
   :move-point nil
@@ -155,7 +175,6 @@ be passed to EVAL-FUNC as its rest arguments"
       (evil-apply-on-block #'hlt-highlight-region beg end nil)
     (hlt-highlight-region beg end)))
 
-;;;###autoload
 (evil-define-operator evil-operator-fold (beg end type)
   "Evil operator for folding region."
   :move-point nil
@@ -165,7 +184,6 @@ be passed to EVAL-FUNC as its rest arguments"
       (evil-apply-on-block #'fold-this beg end nil)
     (fold-this beg end)))
 
-;;;###autoload
 (evil-define-operator evil-operator-org-capture (beg end)
   "Evil operator for org-capture."
   (interactive "<r>")
@@ -176,7 +194,6 @@ be passed to EVAL-FUNC as its rest arguments"
     (goto-char end))
   (org-capture))
 
-;;;###autoload
 (evil-define-operator evil-operator-remember (beg end type)
   "Evil operator for remember-region"
   :move-point nil
@@ -206,6 +223,7 @@ be passed to EVAL-FUNC as its rest arguments"
   :keymap (make-sparse-keymap)
   (evil-normalize-keymaps))
 
+;;;###autoload
 (defun evil-extra-operator-mode-install () (evil-extra-operator-mode 1))
 
 ;;;###autoload
