@@ -51,7 +51,7 @@ To use this command, you should have [google-translate](https://github.com/manzy
 
 Operator to highlight region.
 To use this command, you should have [highlight.el](http://www.emacswiki.org/emacs-en/download/highlight.el) installed.
-You can use `hlt-eraser-mouse` or `hlt-eraser` which are provided by highlight.el to disable highlight
+You can use `hlt-eraser-mouse` or `hlt-eraser` which are provided by highlight.el to erase highlighted area.
 
 ---
 
