@@ -1,4 +1,4 @@
-English is not my first language, so feel free to correct me of any mistake.
+English is not my first language, so feel free to correct any of my mistakes.
 
 evil-extra-operator
 ===================
