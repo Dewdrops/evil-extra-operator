@@ -17,6 +17,12 @@ Installation
 ```
 The key binding customization must be placed BEFORE `(require 'evil-extra-operator)`.
 
+Or you can just choose what commands you need and bind them yourself:
+```lisp
+(require 'evil-extra-operator)
+(define-key evil-motion-state-map "gr" 'evil-operator-eval)
+(define-key evil-motion-state-map "g'" 'evil-operator-google-translate)
+```
 
 Commands and default bindings
 -----------------------------
