@@ -123,6 +123,12 @@ be passed to EVAL-FUNC as its rest arguments"
 ;;;###autoload
 (autoload 'evil-operator-remember "evil-extra-operator"
   "Evil operator for remember-region" t)
+;;;###autoload
+(autoload 'evil-operator-query-replace "evil-extra-operator"
+  "Evil operator to query and replace a region throughout the current buffer" t)
+;;;###autoload
+(autoload 'evil-operator-clone "evil-extra-operator"
+  "Evil operator to create a clone of a motion" t)
 
 
 (evil-define-operator evil-operator-eval (beg end)
@@ -218,7 +224,7 @@ be passed to EVAL-FUNC as its rest arguments"
       (remember-destroy))))
 
 (evil-define-operator evil-operator-query-replace (beg end type)
-  "Query replace the motion in the buffer"
+  "Evil operator to query and replace a region throughout the current buffer"
   (let ((replaced-string (filter-buffer-substring beg end nil))
         (replacement-str (read-string "Replace with:")))
     (save-excursion
@@ -227,7 +233,7 @@ be passed to EVAL-FUNC as its rest arguments"
                     (kill-new replaced-string))))
 
 (evil-define-operator evil-operator-clone (beg end type)
-  "Clone the selected motion"
+  "Evil operator to create a clone of a motion"
   (let (
         (content (filter-buffer-substring beg end nil)))
     (save-excursion
