@@ -225,23 +225,23 @@ be passed to EVAL-FUNC as its rest arguments"
 
 (evil-define-operator evil-operator-query-replace (beg end type)
   "Evil operator to query and replace a region throughout the current buffer"
+  :move-point nil
   (interactive "<r>")
   (let ((replaced-string (filter-buffer-substring beg end nil))
         (replacement-str (read-string "Replace with:")))
-    (save-excursion
-      (goto-char (point-min))
-      (query-replace (regexp-quote replaced-string) replacement-str)
-                    (kill-new replaced-string))))
+    (goto-char (point-min))
+    (query-replace (regexp-quote replaced-string) replacement-str)
+    (kill-new replaced-string)))
 
 (evil-define-operator evil-operator-clone (beg end type)
   "Evil operator to create a clone of a motion"
+  :move-point nil
   (interactive "<r>")
   (let (
         (content (filter-buffer-substring beg end nil)))
-    (save-excursion
-      (goto-char beg)
-      (beginning-of-line)
-      (insert (concat content "\n")))))
+    (goto-char beg)
+    (beginning-of-line)
+    (insert (concat content "\n"))))
 
 
 ;;;###autoload
