@@ -225,6 +225,7 @@ be passed to EVAL-FUNC as its rest arguments"
 
 (evil-define-operator evil-operator-query-replace (beg end type)
   "Evil operator to query and replace a region throughout the current buffer"
+  (interactive "<r>")
   (let ((replaced-string (filter-buffer-substring beg end nil))
         (replacement-str (read-string "Replace with:")))
     (save-excursion
@@ -234,6 +235,7 @@ be passed to EVAL-FUNC as its rest arguments"
 
 (evil-define-operator evil-operator-clone (beg end type)
   "Evil operator to create a clone of a motion"
+  (interactive "<r>")
   (let (
         (content (filter-buffer-substring beg end nil)))
     (save-excursion
