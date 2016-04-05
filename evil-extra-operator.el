@@ -33,7 +33,8 @@
 ;; Commands provided by this package:
 ;; evil-operator-eval, evil-operator-google-translate,
 ;; evil-operator-google-search, evil-operator-highlight, evil-operator-fold,
-;; evil-operator-org-capture, evil-operator-remember 
+;; evil-operator-org-capture, evil-operator-remember, evil-operator-clone,
+;; evil-operator-query-replace
 ;;
 ;; Installation:
 ;;
@@ -215,6 +216,25 @@ be passed to EVAL-FUNC as its rest arguments"
           (run-hooks 'remember-handler-functions)
         (run-hook-with-args-until-success 'remember-handler-functions))
       (remember-destroy))))
+
+(evil-define-operator evil-operator-query-replace (beg end type)
+  "Query replace the motion in the buffer"
+  (let ((replaced-string (filter-buffer-substring beg end nil))
+        (replacement-str (read-string "Replace with:")))
+    (save-excursion
+      (goto-char (point-min))
+      (query-replace (regexp-quote replaced-string) replacement-str)
+                    (kill-new replaced-string))))
+
+(evil-define-operator evil-operator-clone (beg end type)
+  "Clone the selected motion"
+  (let (
+        (content (filter-buffer-substring beg end nil)))
+    (save-excursion
+      (goto-char beg)
+      (beginning-of-line)
+      (insert (concat content "\n")))))
+
 
 ;;;###autoload
 (define-minor-mode evil-extra-operator-mode
