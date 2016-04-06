@@ -227,7 +227,7 @@ be passed to EVAL-FUNC as its rest arguments"
   "Evil operator to query and replace a region throughout the current buffer"
   :move-point nil
   (interactive "<r>")
-  (let ((replaced-string (filter-buffer-substring beg end nil))
+  (let ((replaced-string (buffer-substring-no-properties beg end nil))
         (replacement-str (read-string "Replace with:")))
     (goto-char (point-min))
     (query-replace (regexp-quote replaced-string) replacement-str)
@@ -238,7 +238,7 @@ be passed to EVAL-FUNC as its rest arguments"
   :move-point nil
   (interactive "<r>")
   (let* (
-        (content (filter-buffer-substring beg end nil))
+        (content (buffer-substring-no-properties beg end nil))
         (contains-new-line (not (null (string-match "\n" content))))
         (ends-with-newline (not (null (string-match "\n\\'" content))))
         (new-line-spec (list contains-new-line ends-with-newline)))
