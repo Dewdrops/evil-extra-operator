@@ -236,15 +236,12 @@ be passed to EVAL-FUNC as its rest arguments"
 (evil-define-operator evil-operator-clone (beg end type)
   "Evil operator to create a clone of a motion"
   :move-point nil
-  (interactive "<R>")
+  (interactive "<r>")
   (let* (
         (content (filter-buffer-substring beg end nil))
         (contains-new-line (not (null (string-match "\n" content))))
         (ends-with-newline (not (null (string-match "\n\\'" content))))
         (new-line-spec (list contains-new-line ends-with-newline)))
-
-    (message (format "%S" type))
-    (message (format "%S" content))
     (goto-char beg)
     (insert
      (cond
