@@ -84,15 +84,15 @@ Like evil-operator-org-capture, but use remember-region instead of org-capture.
 
 `No default binding` (evil-operator-query-replace)
 
-Operator to query and replace a region throughout the current buffer.
-Contributed by [talwrii](https://github.com/talwrii)
+Operator to query and replace a region throughout the current buffer.    
+Contributed by [talwrii](https://github.com/talwrii).
 
 ---
 
 `No default binding` (evil-operator-clone)
 
-Operator to create a clone of a motion. This operator will ensure that the inserted string will have a newline at the end (adding one if necessary).
-Contributed by [talwrii](https://github.com/talwrii)
+Operator to create a clone of a motion. This operator will ensure that the inserted string will have a newline at the end (adding one if necessary).    
+Contributed by [talwrii](https://github.com/talwrii).
 
 
 See also
