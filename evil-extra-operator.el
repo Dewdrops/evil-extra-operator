@@ -33,7 +33,8 @@
 ;; Commands provided by this package:
 ;; evil-operator-eval, evil-operator-google-translate,
 ;; evil-operator-google-search, evil-operator-highlight, evil-operator-fold,
-;; evil-operator-org-capture, evil-operator-remember 
+;; evil-operator-org-capture, evil-operator-remember, evil-operator-clone,
+;; evil-operator-query-replace
 ;;
 ;; Installation:
 ;;
@@ -122,6 +123,12 @@ be passed to EVAL-FUNC as its rest arguments"
 ;;;###autoload
 (autoload 'evil-operator-remember "evil-extra-operator"
   "Evil operator for remember-region" t)
+;;;###autoload
+(autoload 'evil-operator-query-replace "evil-extra-operator"
+  "Evil operator to query and replace a region throughout the current buffer" t)
+;;;###autoload
+(autoload 'evil-operator-clone "evil-extra-operator"
+  "Evil operator to create a clone of a motion" t)
 
 
 (evil-define-operator evil-operator-eval (beg end)
@@ -215,6 +222,34 @@ be passed to EVAL-FUNC as its rest arguments"
           (run-hooks 'remember-handler-functions)
         (run-hook-with-args-until-success 'remember-handler-functions))
       (remember-destroy))))
+
+(evil-define-operator evil-operator-query-replace (beg end type)
+  "Evil operator to query and replace a region throughout the current buffer"
+  :move-point nil
+  (interactive "<r>")
+  (let ((replaced-string (buffer-substring-no-properties beg end nil))
+        (replacement-str (read-string "Replace with:")))
+    (goto-char (point-min))
+    (query-replace (regexp-quote replaced-string) replacement-str)
+    (kill-new replaced-string)))
+
+(evil-define-operator evil-operator-clone (beg end type)
+  "Evil operator to create a clone of a motion"
+  :move-point nil
+  (interactive "<r>")
+  (let* (
+        (content (buffer-substring-no-properties beg end nil))
+        (contains-new-line (not (null (string-match "\n" content))))
+        (ends-with-newline (not (null (string-match "\n\\'" content))))
+        (new-line-spec (list contains-new-line ends-with-newline)))
+    (goto-char beg)
+    (insert
+     (cond
+      ((equal new-line-spec '(t t)) content)
+      ((equal new-line-spec '(t nil)) (concat content "\n"))
+      ((equal new-line-spec '(nil nil)) content)
+      (t content)))))
+
 
 ;;;###autoload
 (define-minor-mode evil-extra-operator-mode
