@@ -1,10 +1,10 @@
 ;;; evil-extra-operator.el --- Evil operator for evaluating codes, taking notes, searching via google, etc.
 
-;; Copyright (C) 2014 by Dewdrops
+;; Copyright (C) 2014-2016 by Dewdrops
 
 ;; Author: Dewdrops <v_v_4474@126.com>
 ;; URL: http://github.com/Dewdrops/evil-extra-operator
-;; Version: 0.1
+;; Version: 0.2
 ;; Keywords: evil, plugin
 ;; Package-Requires: ((evil "1.0.7"))
 
