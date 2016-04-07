@@ -168,10 +168,10 @@ be passed to EVAL-FUNC as its rest arguments"
   (if (eq type 'block)
       (let ((s nil))
         (evil-apply-on-block
-         (lambda (b e) (setq s (cons (buffer-substring-no-properties b e) s)))
+         (lambda (b e) (setq s (cons (buffer-substring b e) s)))
          beg end nil)
         (mapconcat 'identity (nreverse s) " "))
-    (buffer-substring-no-properties beg end)))
+    (buffer-substring beg end)))
 
 (evil-define-operator evil-operator-highlight (beg end type)
   "Evil operator for region highlight."
@@ -212,10 +212,10 @@ be passed to EVAL-FUNC as its rest arguments"
               (progn
                 (evil-apply-on-block
                  (lambda (b e)
-                   (setq s (cons (buffer-substring-no-properties b e) s)))
+                   (setq s (cons (buffer-substring b e) s)))
                  beg end nil)
                 (mapconcat 'identity (nreverse s) "\n"))
-            (buffer-substring-no-properties beg end))))
+            (buffer-substring beg end))))
     (with-temp-buffer
       (insert cont)
       (if remember-all-handler-functions
@@ -227,7 +227,7 @@ be passed to EVAL-FUNC as its rest arguments"
   "Evil operator to query and replace a region throughout the current buffer"
   :move-point nil
   (interactive "<r>")
-  (let ((replaced-string (buffer-substring-no-properties beg end nil))
+  (let ((replaced-string (buffer-substring beg end nil))
         (replacement-str (read-string "Replace with:")))
     (goto-char (point-min))
     (query-replace (regexp-quote replaced-string) replacement-str)
@@ -238,7 +238,7 @@ be passed to EVAL-FUNC as its rest arguments"
   :move-point nil
   (interactive "<r>")
   (let* (
-        (content (buffer-substring-no-properties beg end nil))
+        (content (buffer-substring beg end nil))
         (contains-new-line (not (null (string-match "\n" content))))
         (ends-with-newline (not (null (string-match "\n\\'" content))))
         (new-line-spec (list contains-new-line ends-with-newline)))
