@@ -88,8 +88,13 @@
   :group 'evil-extra-operator)
 
 (defcustom evil-extra-operator-eval-modes-alist
-  '((ruby-mode ruby-send-region)
-    (enh-ruby-mode ruby-send-region))
+  '((lisp-mode slime-eval-region)
+    (scheme-mode geiser-eval-region)
+    (clojure-mode cider-eval-region)
+    (ruby-mode ruby-send-region)
+    (enh-ruby-mode ruby-send-region)
+    (python-mode python-shell-send-region)
+    (julia-mode julia-shell-run-region))
   "Alist used to determine evil-operator-eval's behaviour.
 Each element of this alist should be of this form:
 
@@ -141,7 +146,7 @@ be passed to EVAL-FUNC as its rest arguments"
          (args (cdr-safe f-a)))
     (if (fboundp func)
         (apply func beg end args)
-      (eval-region beg end))))
+      (eval-region beg end t))))
 
 (evil-define-operator evil-operator-google-translate (beg end type)
   "Evil operator for translating text via google translate."
