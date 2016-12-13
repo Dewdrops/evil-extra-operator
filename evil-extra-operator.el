@@ -146,7 +146,7 @@ be passed to EVAL-FUNC as its rest arguments"
          (args (cdr-safe f-a)))
     (if (fboundp func)
         (apply func beg end args)
-      (eval-region beg end))))
+      (eval-region beg end t))))
 
 (evil-define-operator evil-operator-google-translate (beg end type)
   "Evil operator for translating text via google translate."
