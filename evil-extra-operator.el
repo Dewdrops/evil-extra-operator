@@ -88,8 +88,13 @@
   :group 'evil-extra-operator)
 
 (defcustom evil-extra-operator-eval-modes-alist
-  '((ruby-mode ruby-send-region)
-    (enh-ruby-mode ruby-send-region))
+  '((lisp-mode slime-eval-region)
+    (scheme-mode geiser-eval-region)
+    (clojure-mode cider-eval-region)
+    (ruby-mode ruby-send-region)
+    (enh-ruby-mode ruby-send-region)
+    (python-mode python-shell-send-region)
+    (julia-mode julia-shell-run-region))
   "Alist used to determine evil-operator-eval's behaviour.
 Each element of this alist should be of this form:
 
