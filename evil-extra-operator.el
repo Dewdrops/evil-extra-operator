@@ -152,7 +152,8 @@ be passed to EVAL-FUNC as its rest arguments"
   "Evil operator for translating text via google translate."
   :move-point nil
   (interactive "<R>")
-  (require 'google-translate)
+  (unless (require 'google-translate nil t)
+    (error "You must install the google-translate package to use evil-operator-google-translate"))
   (let* ((langs (google-translate-read-args nil nil))
          (source-language (car langs))
          (target-language (cadr langs)))
@@ -182,7 +183,8 @@ be passed to EVAL-FUNC as its rest arguments"
   "Evil operator for region highlight."
   :move-point nil
   (interactive "<R>")
-  (require 'highlight)
+  (unless (require 'highlight nil t)
+    (error "You must install the highlight package to use evil-operator-highlight"))
   (if (eq type 'block)
       (evil-apply-on-block #'hlt-highlight-region beg end nil)
     (hlt-highlight-region beg end)))
@@ -191,7 +193,8 @@ be passed to EVAL-FUNC as its rest arguments"
   "Evil operator for folding region."
   :move-point nil
   (interactive "<R>")
-  (require 'fold-this)
+  (unless (require 'fold-this nil t)
+    (error "You must install the fold-this package to use evil-operator-fold"))
   (if (eq type 'block)
       (evil-apply-on-block #'fold-this beg end nil)
     (fold-this beg end)))
@@ -199,7 +202,8 @@ be passed to EVAL-FUNC as its rest arguments"
 (evil-define-operator evil-operator-org-capture (beg end)
   "Evil operator for org-capture."
   (interactive "<r>")
-  (require 'org)
+  (unless (require 'org nil t)
+    (error "You must install the org package to use evil-operator-org-capture"))
   (unless (region-active-p)
     (goto-char beg)
     (set-mark-command nil)
@@ -210,7 +214,8 @@ be passed to EVAL-FUNC as its rest arguments"
   "Evil operator for remember-region"
   :move-point nil
   (interactive "<R>")
-  (require 'remember)
+  (unless (require 'remember nil t)
+    (error "You must install the remember package to use evil-operator-remember"))
   (let* ((s nil)
          (cont
           (if (eq type 'block)
