@@ -1,6 +1,6 @@
 ;;; evil-extra-operator.el --- Evil operator for evaluating codes, taking notes, searching via google, etc.
 
-;; Copyright (C) 2014-2016 by Dewdrops
+;; Copyright (C) 2014-2021 by Dewdrops
 
 ;; Author: Dewdrops <v_v_4474@126.com>
 ;; URL: http://github.com/Dewdrops/evil-extra-operator
@@ -148,7 +148,7 @@ be passed to EVAL-FUNC as its rest arguments"
   "Evil operator to create a clone of a motion" t)
 
 (evil-define-operator evil-operator-eval-replace (beg end)
-  "Evil operator for evaluating code."
+  "Evil operator for replacing contents with result from eval."
   :move-point nil
   (interactive "<r>")
   (let* ((ele (assoc major-mode evil-extra-operator-eval-replace-modes-alist))
