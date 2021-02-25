@@ -94,6 +94,13 @@ Contributed by [talwrii](https://github.com/talwrii).
 Operator to create a clone of a motion. This operator will ensure that the inserted string will have a newline at the end (adding one if necessary).    
 Contributed by [talwrii](https://github.com/talwrii).
 
+---
+
+`No default binding` (evil-operator-eval-replace)
+
+Operator to insert the result of an eval into the buffer, replacing the evaluated expression.    
+Contributed by [jgkamat](https://github.com/jgkamat).
+
 
 See also
 -----------------------------
