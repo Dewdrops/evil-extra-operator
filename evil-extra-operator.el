@@ -106,6 +106,18 @@ be passed to EVAL-FUNC as its rest arguments"
   :type '(alist :key-type symbol)
   :group 'evil-extra-operator)
 
+(defcustom evil-extra-operator-eval-replace-modes-alist
+  '()
+  "Alist used to determine evil-operator-eval-replace's behaviour.
+Each element of this alist should be of this form:
+
+ (MAJOR-MODE EVAL-FUNC [ARGS...])
+
+MAJOR-MODE denotes the major mode of buffer. EVAL-FUNC should be a function
+with at least 2 arguments: the region beginning and the region end. ARGS will
+be passed to EVAL-FUNC as its rest arguments"
+  :type '(alist :key-type symbol)
+  :group 'evil-extra-operator)
 
 ;;;###autoload
 (autoload 'evil-operator-eval "evil-extra-operator"
@@ -135,6 +147,20 @@ be passed to EVAL-FUNC as its rest arguments"
 (autoload 'evil-operator-clone "evil-extra-operator"
   "Evil operator to create a clone of a motion" t)
 
+(evil-define-operator evil-operator-eval-replace (beg end)
+  "Evil operator for evaluating code."
+  :move-point nil
+  (interactive "<r>")
+  (let* ((ele (assoc major-mode evil-extra-operator-eval-replace-modes-alist))
+         (f-a (cdr-safe ele))
+         (func (car-safe f-a))
+         (args (cdr-safe f-a))
+         (text (buffer-substring-no-properties beg end))
+         (result (if (fboundp func)
+                     (apply func beg end args)
+                   (format "%s" (eval (read text))))))
+    (delete-region beg end)
+    (insert result)))
 
 (evil-define-operator evil-operator-eval (beg end)
   "Evil operator for evaluating code."
